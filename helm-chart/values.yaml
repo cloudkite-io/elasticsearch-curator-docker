@@ -1,0 +1,14 @@
+image:
+  repository: gcr.io/cloudkite-public/elasticsearch-curator
+  tag: latest
+  pullPolicy: IfNotPresent
+
+cronjob:
+  schedule: "0 8 * * *"
+  command: curator --config /curator.yml /curator_actions.yml
+
+env:
+- name: ELASTICSEARCH_HOSTNAME
+  value: efk-elasticsearch-client.efk.svc.cluster.local
+- name: RETENTION_DAYS
+  value: "15"
